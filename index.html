@@ -1,5 +1,22 @@
 <script src="./config.js"></script>
 <script>
+    const fileServerReq = (path, method, body, cb) => {
+        var xhr = new XMLHttpRequest();
+
+        xhr.onload = () => {
+            cb(xhr)
+        }
+
+        xhr.open(method, config.fileServerUrl + path);
+
+        if(method.toLowerCase() === 'post') {
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            xhr.send(JSON.stringify(body));
+        } else {
+            xhr.send();
+        }
+    }
+
     window.onload = () => {
         var canvas = document.getElementById("Image");
         var canvasContainer = document.getElementById("canvasContainer");
